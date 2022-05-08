@@ -4,7 +4,8 @@
 
 BoustrophedonPlannerServer::BoustrophedonPlannerServer()
   : private_node_handle_("~")
-  , action_server_(node_handle_, "plan_path", boost::bind(&BoustrophedonPlannerServer::executePlanPathAction, this, _1),
+  , action_server_(node_handle_, "plan_path", boost::bind(&BoustrophedonPlannerServer::executePlanPathAction,
+        this, boost::placeholders::_1),
                    false)
   , conversion_server_{ node_handle_.advertiseService("convert_striping_plan_to_path",
                                                       &BoustrophedonPlannerServer::convertStripingPlanToPath, this) }
